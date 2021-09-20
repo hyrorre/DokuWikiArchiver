@@ -21,7 +21,14 @@ DATE="`date +%Y%m%d`"
 checkDir "${BACKUPPATH}"
 
 # create a backup
-tar -czf "${BACKUPPATH}/backup_${DATE}.tgz" -C "${WIKIPATH}" "data/pages" "data/media"
+tar -czf "${BACKUPPATH}/backup_${DATE}.tgz" -C "${WIKIPATH}" \
+    "data/pages" \
+    "data/meta" \
+    "data/media" \
+    "data/media_meta" \
+    "data/attic" \
+    "data/media_attic" \
+    "conf"
 
 # delete old backup(s)
 find "${BACKUPPATH}" -name "backup_*.tgz" -mtime +$SAVE_DAYS -exec echo {} \; -exec rm -f {} \;
