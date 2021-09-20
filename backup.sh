@@ -30,5 +30,11 @@ tar -czf "${BACKUPPATH}/backup_${DATE}.tgz" -C "${WIKIPATH}" \
     "data/media_attic" \
     "conf"
 
+if [ -e "${BACKUPPATH}/backup_${DATE}.tgz" ]; then
+    echo "Created backup_${DATE}.tgz"
+else
+    echo "Failed to create backup_${DATE}.tgz"
+fi
+
 # delete old backup(s)
-find "${BACKUPPATH}" -name "backup_*.tgz" -mtime +$SAVE_DAYS -exec echo {} \; -exec rm -f {} \;
+find "${BACKUPPATH}" -name "backup_*.tgz" -mtime +$SAVE_DAYS -exec echo "Removed {}" \; -exec rm -f {} \;
